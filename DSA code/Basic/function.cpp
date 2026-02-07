@@ -5,7 +5,7 @@ int factorial(int x){
 
     int num=1;
 
-    for(int i=1;i<=x;i++){
+    for(int i=x;i>0;i--){
         num*=i;
     }
 
