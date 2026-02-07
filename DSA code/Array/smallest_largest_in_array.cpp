@@ -19,7 +19,6 @@ int main(){
         } 
 
         // smallest = min(nums[i],smallest);
-        
 
         if(nums[i] > largest){
             largest = nums[i];
