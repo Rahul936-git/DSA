@@ -1,57 +1,54 @@
-#include<iostream>
-#include<vector>
+#include<bits/stdc++.h>
 using namespace std;
 
 class Node{
+public:
 
-          public:
-                    int data;
-                    Node *left;
-                    Node *right;
+    int data;
+    Node* left;
+    Node* right;
 
-          Node(int val){
-
-                    data = val;
-                    left = right = NULL;
-          }
+    Node(int val){
+        data=val;
+        left=right=NULL;
+    }
 };
 
-static int idx = -1;
+    static int idx = -1;
 
-Node* buildtree(vector<int>&preOrder){
+Node* buildTree(vector<int>preorder){
+    idx++;
 
-          idx++;
+    if(preorder[idx]==-1) return NULL;
 
-          if(preOrder[idx] == -1) return NULL;
+    Node* root=new Node(preorder[idx]);
 
-          Node* root = new Node(preOrder[idx]);
+    root->left= buildTree(preorder);
+    root->right=buildTree(preorder);
 
-          root->left = buildtree(preOrder);
-          root->right = buildtree(preOrder);
+    return root;
 
-          return root;
+}
+
+void PreOrder(Node* root){
+
+    if(root==NULL) return;
+
+    cout<<root->data<<" ";
+    PreOrder(root->left);
+    PreOrder(root->right);
 }
 
 
-
-void preOrder(Node* root){
-
-          if(root == NULL) return;
-
-          cout << root->data << " ";
-          preOrder(root->left);
-          preOrder(root->right);
-}
 
 int main(){
 
-          vector<int>preorder = {1,2,-1,-1,3,4,-1,-1,5,-1,-1};
+    vector<int>preorder={1,2,-1,-1,3,4,-1,-1,5,-1,-1};
 
-          Node* root = buildtree(preorder);
+    Node* root = buildTree(preorder);
+    PreOrder(root);
 
-          preOrder(root);
+    cout<<endl;
 
-          cout<<endl;
-
-          return 0;
+    return 0;
 }

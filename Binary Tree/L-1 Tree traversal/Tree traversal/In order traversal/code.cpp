@@ -1,55 +1,49 @@
 #include<bits/stdc++.h>
-#include<iostream>
 using namespace std;
 
-class Node {
-
+class Node{
 public:
 
-          int data;
-          Node* left;
-          Node* right;
+    int data;
+    Node* left;
+    Node* right;
 
-          Node(int val){
-                    data = val;
-                    left = right = NULL;
-          }
+    Node(int val){
+        data=val;
+        left=right=NULL;
+    }
 };
 
 static int idx = -1;
 
-Node* buildTree(vector<int>&preorder){
+Node* buildTree(vector<int>preorder){
+    idx++;
 
-          idx++;
+    if(preorder[idx]==-1) return NULL;
 
-          if(preorder[idx]==-1)
-                    return NULL;
+    Node* root = new Node(preorder[idx]);
 
-          Node *root = new Node(preorder[idx]);
+    root->left=buildTree(preorder);
+    root->right=buildTree(preorder);
 
-          root->left = buildTree(preorder);
-          root->right = buildTree(preorder);
-
-          return root;
+    return root;
 }
 
-void InOrder(Node* root){
+void Inorder(Node* root){
 
-          if(root == NULL)
-                    return;
+    if(root==NULL) return;
 
-          InOrder(root->left);
-          cout << root->data << " ";
-          InOrder(root->right);
+    Inorder(root->left);
+    cout<<root->data<<" ";  
+    Inorder(root->right);
 }
 
 int main(){
 
-          vector<int>preorder = {1, 2, -1, -1, 3, 4, -1, -1, 5, -1, -1};
+    vector<int>preorder={1,2,-1,-1,3,4,-1,-1,5,-1,-1};
 
-          Node *root = buildTree(preorder);
+    Node* root = buildTree(preorder);
+    Inorder(root);
 
-          InOrder(root);
-
-          return 0;
+    return 0;
 }
